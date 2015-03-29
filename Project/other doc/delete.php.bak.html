@@ -1,0 +1,47 @@
+<html>
+<head>
+	  <title> Employee : : Delete Records</title>
+</head>
+ <body>
+ <form  method="post">
+  <table width="350" align="center" border="2" >
+  <tr>
+  <td align="center"  colspan="2">Delete Employee Information</td>
+  </tr>
+  <tr>
+  <td align="right">Employee ID</td>
+  <td align="left"><input type="text" name="txteid" placeholder="Enter Employee Id." required></td>
+  </tr>
+  <tr>
+<td align="center" colspan="2"><input type="submit" name="btndelete" value="delete"></td>
+</tr>
+  </table>
+  </form>
+ </body>
+</html>
+<?php
+$a=$_POST['txteid'];
+$con=mysql_connect("localhost","root");
+// Check connection
+if (!$con)
+  {
+  echo"You Cannot Connect To MYSQL";
+  }
+mysql_select_db("employee",$con);
+$sql="delete from empinfo where eid='$a' ";
+$e=mysql_query($sql);
+if ($e)
+{
+	<html>
+		<body>
+
+	<center>echo"Data Has Been Successfully Deleted.";</center>
+</body>
+		</html>
+}
+else
+  {
+  die("Try Again.").mysql_error();
+  }
+mysql_close($con);
+?> 

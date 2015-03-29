@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Getting Information Of Employee</title>
+</head>
+<body>
+<form method="post" >
+<table width="400" border="2">
+<tr>
+<th>EID</th>
+<th>EMPNAME</th>
+<th>Department</th>
+<th>City</th>
+</tr>
+<?php
+$dbhost = 'localhost';
+$dbuser = 'root';
+$conn = mysql_connect($dbhost, $dbuser);
+if(! $conn )
+{
+  die('Could not connect: ' . mysql_error());
+}
+$sql = 'SELECT * FROM empinfo';
+mysql_select_db('employee');
+$retval = mysql_query( $sql, $conn );
+if(! $retval )
+{
+  die('Could not get data: ' . mysql_error());
+}
+while($row = mysql_fetch_array($retval))
+{
+	echo"<tr>";
+    echo "<td>".$row['eid'] ."</td>";
+   echo "<td>".$row['empname']."</td>";
+   echo"<td>".$row['department'] ."</td>";
+   echo"<td>".$row['city']."</td>";
+   	echo"</tr>";
+} 
+echo "Fetched data successfully\n";
+mysql_close($conn);
+?>
+</table>
+</form>
+</body>
+</html>
